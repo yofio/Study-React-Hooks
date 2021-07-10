@@ -1,16 +1,15 @@
-import "./styles.css";
-import { UserCard } from "./components/UseCard";
 import axios from "axios";
-import { User } from "./types/api/user";
 import { useState } from "react";
-import { UserProfile } from "./types/userPropfile";
+import { User } from "../types/api/user";
+import { UserProfile } from "../types/userPropfile";
 
-export default function App() {
+// 全ユーザー一覧を取得すカスタムフック
+export const userAllUsers = () => {
   const [userProfile, setUserProfile] = useState<Array<UserProfile>>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const onClickFetchdate = () => {
+  const getUsers = () => {
     setLoading(true);
     setError(false);
 
@@ -33,21 +32,5 @@ export default function App() {
       });
   };
 
-  return (
-    <div className="App">
-      <button onClick={onClickFetchdate}>データ取得</button>
-      <br />
-      {error ? (
-        <p>エラー</p>
-      ) : loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {userProfile.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
-        </>
-      )}
-    </div>
-  );
-}
+  return { getUsers, userProfile, loading, error };
+};
