@@ -3,7 +3,6 @@ import { useState } from "react";
 import { User } from "../types/api/user";
 import { UserProfile } from "../types/userPropfile";
 
-// 全ユーザー一覧を取得すカスタムフック
 export const userAllUsers = () => {
   const [userProfile, setUserProfile] = useState<Array<UserProfile>>([]);
   const [loading, setLoading] = useState(false);
